@@ -2,9 +2,8 @@ const express = require('express');
 const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 const fs = require('fs');
-ffmpeg.setFfmpegPath('C:/ffmpeg/bin/ffmpeg.exe');
 const app = express();
-const PORT = 3000;
+const PORT = 8888;
 const rtspUrl = "rtsp://admin:TA1234567*@69.219.107.207:554/media/video1";
 
 // create public folder if not exists
@@ -44,5 +43,4 @@ app.use(express.static('public'));
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running. Open in browser (video player):`);
     console.log(`  http://localhost:${PORT}/`);
-    console.log(`  http://192.168.145.76:${PORT}/`);
 });
