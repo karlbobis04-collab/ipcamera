@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RTSP → HLS Stream</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #error { color: #c00; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Live Stream</h1>
+  <p>Use this page to watch. Do not open <code>/stream.m3u8</code> directly—it’s the playlist, not a player.</p>
+  <video id="video" controls autoplay width="800"></video>
+  <p id="error"></p>
+
+  <script>
+    var video = document.getElementById('video');
+    var errEl = document.getElementById('error');
+    var hls = new Hls();
+    hls.loadSource('/stream.m3u8');
+    hls.attachMedia(video);
+    hls.on(Hls.Events.ERROR, function (e, data) {
+      if (data.fatal) {
+        errEl.textContent = 'Stream error: ' + (data.response ? 'network/URL' : data.type) + '. Is the server running and FFmpeg connected to the camera?';
+      }
+    });
+  </script>
+</body>
+</html>
