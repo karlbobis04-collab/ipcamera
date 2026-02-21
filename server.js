@@ -13,6 +13,15 @@ if (!fs.existsSync('public')) {
 
 const outputPath = path.join(__dirname, "public/stream.m3u8");
 
+// CORS: allow frontend (e.g. localhost:8100) to load stream
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Range');
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
+
 // Correct MIME types for HLS (required for playback in browsers)
 const mimeTypes = {
   '.m3u8': 'application/vnd.apple.mpegurl',
