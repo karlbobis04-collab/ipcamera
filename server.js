@@ -4,7 +4,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const PORT = 3000;
+const PORT = 8888;
 const rtspUrl = "rtsp://admin:TA1234567*@69.219.107.207:554/media/video1";
 
 // create public folder if not exists
